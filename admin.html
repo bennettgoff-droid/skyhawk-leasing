@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin | Skyhawk Leasing</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark">SL</span><span><strong>Skyhawk Leasing Admin</strong><small>Aircraft, pricing, files, customers</small></span></a>
+    <div class="nav-links always-show"><a href="index.html">View Website</a><button class="admin-link-button" id="logout-button">Log Out</button></div>
+  </nav>
+</header>
+
+<main>
+  <section class="section admin-hero">
+    <div class="section-heading">
+      <p class="eyebrow">Administrator</p>
+      <h1>Manage aircraft, pricing tiers, files, and customers.</h1>
+      <p>Future aircraft added here show up on the public website when marked public. Pricing tiers can be changed anytime.</p>
+    </div>
+  </section>
+
+  <section class="section" id="login-section">
+    <form id="login-form" class="admin-form login-form">
+      <div class="form-section-title"><h2>Admin login</h2><p>Use your Supabase Auth email/password user.</p></div>
+      <label class="full">Email<input id="login-email" type="email" required /></label>
+      <label class="full">Password<input id="login-password" type="password" required /></label>
+      <button class="button full" type="submit">Log In</button>
+      <p class="helper-text full" id="login-message"></p>
+    </form>
+  </section>
+
+  <section class="section admin-layout" id="admin-section" hidden>
+    <div class="admin-main">
+      <form id="aircraft-form" class="admin-form">
+        <input type="hidden" id="plane-id" />
+        <div class="form-section-title"><h2>Aircraft details</h2><p>Add future aircraft and mark them public when ready.</p></div>
+        <label>Tail number<input id="tail-number" placeholder="N36JR" required /></label>
+        <label>Status<select id="status"><option>Available</option><option>Coming Soon</option><option>Reserved</option><option>Leased</option></select></label>
+        <label>Category<select id="category"><option>Glass Panel</option><option>Standard / IFR</option><option>Fleet Expansion</option></select></label>
+        <label>Display order<input id="display-order" type="number" min="0" /></label>
+        <label>Year<input id="year" placeholder="2012" /></label>
+        <label>Model<input id="model" placeholder="Cessna 172S Skyhawk" /></label>
+        <label>Panel / Avionics<input id="panel" placeholder="Garmin G1000 / GFC700 / ADS-B" /></label>
+        <label>Total time<input id="total-time" placeholder="5,600 TT" /></label>
+        <label>Engine time<input id="engine-time" placeholder="400 SMOH" /></label>
+        <label>Lease note<input id="lease" placeholder="Monthly minimum + hourly overage" /></label>
+        <label>Public listing<select id="is-public"><option value="true">Public</option><option value="false">Hidden</option></select></label>
+        <label class="full">Summary<textarea id="summary" rows="4"></textarea></label>
+        <div class="admin-actions full">
+          <button class="button" type="submit">Save Aircraft</button>
+          <button class="button secondary" type="button" id="new-plane">New Aircraft</button>
+          <button class="button danger" type="button" id="delete-plane">Delete Selected</button>
+        </div>
+      </form>
+
+      <form id="pricing-form" class="admin-form">
+        <input type="hidden" id="pricing-id" />
+        <div class="form-section-title"><h2>Pricing tiers</h2><p>Examples: Unlimited Hours, 50 Hour Minimum, Summer Special, Multi-Aircraft Package.</p></div>
+        <label>Tier name<input id="tier-name" placeholder="50 Hour Minimum" required /></label>
+        <label>Tier type<select id="tier-type"><option value="minimum">Minimum hours + overage</option><option value="unlimited">Unlimited hours</option><option value="custom">Custom / call for quote</option></select></label>
+        <label>Monthly price<input id="monthly-price" type="number" min="0" step="1" placeholder="6500" /></label>
+        <label>Included hours<input id="included-hours" type="number" min="0" step="1" placeholder="50" /></label>
+        <label>Overage rate<input id="overage-rate" type="number" min="0" step="1" placeholder="115" /></label>
+        <label>Display order<input id="tier-display-order" type="number" min="0" /></label>
+        <label>Public<select id="tier-public"><option value="true">Show on website</option><option value="false">Hidden</option></select></label>
+        <label class="full">Notes<textarea id="tier-notes" rows="3" placeholder="Includes 50 Hobbs hours per month; $115/hr above minimum."></textarea></label>
+        <div class="admin-actions full">
+          <button class="button" type="submit">Save Tier</button>
+          <button class="button secondary" type="button" id="new-tier">New Tier</button>
+          <button class="button danger" type="button" id="delete-tier">Delete Tier</button>
+        </div>
+        <div class="records-list full" id="pricing-list"></div>
+      </form>
+
+      <form class="admin-form">
+        <div class="form-section-title"><h2>File database</h2><p>Upload aircraft photos, videos, logbook scans, maintenance records, and PDFs.</p></div>
+        <label>File category<select id="file-category"><option value="photo">Photo</option><option value="video">Video</option><option value="logbook">Logbook Scan</option><option value="maintenance">Maintenance Record</option><option value="document">Other Document</option></select></label>
+        <label>Visibility<select id="file-public"><option value="false">Private / admin only</option><option value="true">Public on website</option></select></label>
+        <label class="full">Upload files<input id="file-upload" type="file" accept="image/*,video/*,application/pdf,.pdf,.doc,.docx,.xls,.xlsx" multiple /></label>
+        <button class="button secondary full" type="button" id="upload-files">Upload Selected Files</button>
+        <div class="file-preview-list full" id="file-preview-list"></div>
+      </form>
+
+      <form class="admin-form">
+        <div class="form-section-title"><h2>Customer database</h2><p>Website signups appear here. Add/import flight schools and export CSV for Mailchimp if needed.</p></div>
+        <label>Organization<input id="cust-org" placeholder="ABC Flight School" /></label>
+        <label>Contact<input id="cust-contact" placeholder="Name" /></label>
+        <label>Email<input id="cust-email" type="email" placeholder="email@example.com" /></label>
+        <label>Phone<input id="cust-phone" /></label>
+        <label>City<input id="cust-city" /></label>
+        <label>State<input id="cust-state" /></label>
+        <label>Type<select id="cust-type"><option>Flight School</option><option>University</option><option>Flying Club</option><option>Fleet Operator</option><option>Other</option></select></label>
+        <label>Monthly hours<input id="cust-hours" placeholder="50+" /></label>
+        <label class="checkbox full"><input id="cust-consent" type="checkbox" checked /> Marketing consent</label>
+        <label class="full">Notes<textarea id="cust-notes" rows="3"></textarea></label>
+        <div class="admin-actions full">
+          <button class="button" type="button" id="save-customer">Save Customer</button>
+          <button class="button secondary" type="button" id="sync-customer">Sync Selected to Mailchimp</button>
+          <button class="button secondary" type="button" id="export-customers">Export CSV</button>
+        </div>
+        <label class="full">Bulk import CSV paste<textarea id="bulk-csv" rows="6" placeholder="organization,email,contact,phone,city,state,type"></textarea></label>
+        <button class="button secondary full" type="button" id="import-customers">Import Pasted Customers</button>
+        <textarea class="full" id="csv-output" rows="5" placeholder="CSV export appears here."></textarea>
+        <div class="records-list full" id="customer-list"></div>
+      </form>
+    </div>
+
+    <aside class="admin-sidebar">
+      <div class="form-section-title"><h2>Inventory</h2><p>Click aircraft to edit pricing/files.</p></div>
+      <div id="admin-aircraft-list" class="admin-aircraft-list"></div>
+      <div class="admin-utility"><h3>Connection</h3><p class="helper-text" id="connection-status">Checking Supabase…</p><button class="button secondary full-width" type="button" id="refresh-data">Refresh</button></div>
+    </aside>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

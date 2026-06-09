@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Skyhawk Leasing | Cessna 172S Leasing</title>
+  <meta name="description" content="Cessna 172S Skyhawk dry leasing for flight schools, universities, flying clubs, and training operators." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">SL</span>
+        <span><strong>Skyhawk Leasing</strong><small>Cessna 172S training aircraft</small></span>
+      </a>
+      <button class="mobile-menu" onclick="document.body.classList.toggle('menu-open')">☰</button>
+      <div class="nav-links">
+        <a href="#fleet">Aircraft</a>
+        <a href="#program">Program</a>
+        <a href="#how">How Leasing Works</a>
+        <a href="#signup" class="nav-cta">Get New Listings</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Cessna 172S aircraft leasing</p>
+        <h1>Add Skyhawk capacity without buying aircraft.</h1>
+        <p class="hero-text">We lease Cessna 172S Skyhawks to flight schools, universities, flying clubs, and commercial training operators that need reliable aircraft, predictable economics, and clean records.</p>
+        <div class="hero-actions">
+          <a class="button" href="#fleet">View Aircraft</a>
+          <a class="button secondary" href="#signup">Join Availability List</a>
+        </div>
+        <div class="trust-row">
+          <div><strong id="aircraft-count">2</strong><span>Aircraft listed</span></div>
+          <div><strong>Pricing</strong><span>Managed in admin</span></div>
+          <div><strong>Records</strong><span>Files stored by aircraft</span></div>
+          <div><strong>Email</strong><span>Mailchimp-ready leads</span></div>
+        </div>
+      </div>
+      <aside class="quote-box">
+        <p class="eyebrow">For operators</p>
+        <h2>Tell us what you need.</h2>
+        <p>Need one aircraft now, a multi-aircraft package, or specific avionics? Send your location, start date, monthly hours, and preferred lease structure.</p>
+        <ul>
+          <li>Unlimited-hour and minimum-hour tiers</li>
+          <li>Glass-panel and standard IFR aircraft</li>
+          <li>Photos, videos, and logbook files by tail number</li>
+          <li>New listing email updates for schools and universities</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="mini-band">
+      <span>Flight Schools</span><span>Universities</span><span>Flying Clubs</span><span>Fleet Operators</span>
+    </section>
+
+    <section class="section" id="fleet">
+      <div class="section-heading">
+        <p class="eyebrow">Available aircraft</p>
+        <h2 id="fleet-heading">Aircraft currently available for lease.</h2>
+        <p>Aircraft specs, pricing tiers, photos, videos, and selected public records are loaded from Supabase.</p>
+      </div>
+      <div class="fleet-toolbar">
+        <span>Inventory:</span>
+        <button data-filter="all">All</button>
+        <button data-filter="Glass Panel">Glass Panel</button>
+        <button data-filter="Standard / IFR">Standard / IFR</button>
+        <button data-filter="Available">Available</button>
+      </div>
+      <div class="fleet-grid" id="fleet-grid"><div class="empty-state">Loading aircraft…</div></div>
+    </section>
+
+    <section class="section split" id="program">
+      <div>
+        <p class="eyebrow">Program overview</p>
+        <h2>Dry leases built around flight-school utilization.</h2>
+        <p>Pricing can be shown publicly by aircraft and tier. Examples include unlimited hours for a fixed monthly price, or a 50-hour monthly minimum with hourly overages.</p>
+        <p>If the exact aircraft is not listed, we may be able to source or acquire additional Cessna 172S aircraft for qualified long-term operators.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Typical lease framework</h3>
+        <ul class="check-list">
+          <li>Monthly minimum or unlimited-hour pricing options</li>
+          <li>Overage rate for hours above included hours</li>
+          <li>Security deposit based on aircraft and operator profile</li>
+          <li>Maintenance, insurance, hangar, and records obligations defined in the lease</li>
+          <li>Monthly Hobbs/Tach reporting and payment process</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section panel-section" id="how">
+      <div class="section-heading centered">
+        <p class="eyebrow">How leasing works</p>
+        <h2>From aircraft need to lease start.</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span>01</span><h3>Define need</h3><p>Aircraft count, airport, start date, avionics, and monthly hours.</p></div>
+        <div class="step"><span>02</span><h3>Review options</h3><p>Compare specs, records, pricing tiers, and delivery timing.</p></div>
+        <div class="step"><span>03</span><h3>Finalize lease</h3><p>Complete lease, deposit, insurance, maintenance, and logistics.</p></div>
+        <div class="step"><span>04</span><h3>Operate</h3><p>Fly, report time, manage records, and pay minimums plus overages.</p></div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="signup">
+      <div class="contact-card">
+        <div class="contact-copy">
+          <p class="eyebrow">New listing updates</p>
+          <h2>Join the flight-school availability list.</h2>
+          <p>We will save the contact in Supabase. If the Mailchimp Edge Function is deployed, the contact can also be synced to your Mailchimp audience for new listing and pricing emails.</p>
+        </div>
+        <form class="contact-form" id="lead-form">
+          <label>Name<input name="contact_name" placeholder="Your name" required /></label>
+          <label>Organization<input name="organization_name" placeholder="Flight school / university" required /></label>
+          <label>Email<input name="email" type="email" placeholder="you@example.com" required /></label>
+          <label>Phone<input name="phone" placeholder="Phone" /></label>
+          <label>City<input name="city" placeholder="City" /></label>
+          <label>State<input name="state" placeholder="State" /></label>
+          <label>Customer type
+            <select name="customer_type">
+              <option>Flight School</option>
+              <option>University</option>
+              <option>Flying Club</option>
+              <option>Fleet Operator</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Monthly hours<input name="monthly_hours" placeholder="50, 75, 100+" /></label>
+          <label class="full">Notes<textarea name="notes" rows="4" placeholder="Aircraft needs, start date, avionics preference, airports served."></textarea></label>
+          <label class="checkbox full"><input name="marketing_consent" type="checkbox" checked /> I agree to receive aircraft availability and pricing updates.</label>
+          <button class="button" type="submit">Sign Up</button>
+          <p class="form-note" id="lead-message"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Skyhawk Leasing. All rights reserved.</p>
+    <p><a href="admin.html">Admin</a></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="site.js"></script>
+</body>
+</html>
